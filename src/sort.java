@@ -13,13 +13,15 @@ import java.io.IOException;
  */
 public class sort {
 	
+	private BufferedWriter escritor;
+
 	public void generarArchivo(File archivo){
 		String numeros = "numeros.txt";
 		File fichero = new File (numeros);
 		
 		if (fichero.exists()){
 			try {
-				BufferedWriter escritor = new BufferedWriter(new FileWriter(numeros));
+				BufferedWriter escritor = new BufferedWriter(new FileWriter("numeros.Txt"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -27,11 +29,53 @@ public class sort {
 		for (int i = 0; i < 3000; i++){
 			int num = 0;
 			num = Math.subtractExact(0, 3000);
-			escritor.write(" "+num+" ");
+			try {
+				escritor.write(" "+num+" ");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-		}	
+		}
+		try {
+			escritor.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		}
 	}
+	
+	public void lectura(File archivo){
+		
+	}
+	
+	public void QuickSort(int A[], int izq, int der){
+		  int pivote=A[izq]; // tomamos primer elemento como pivote
+		  int i=izq; // i realiza la búsqueda de izquierda a derecha
+		  int j=der; // j realiza la búsqueda de derecha a izquierda
+		  int aux;
+		 
+		  while(i<j){            // mientras no se crucen las búsquedas
+		     while(A[i]<=pivote && i<j) i++; // busca elemento mayor que pivote
+		     while(A[j]>pivote) j--;         // busca elemento menor que pivote
+		     if (i<j) {                      // si no se han cruzado                      
+		         aux= A[i];                  // los intercambia
+		         A[i]=A[j];
+		         A[j]=aux;
+		     }
+		   }
+		   A[izq]=A[j]; // se coloca el pivote en su lugar de forma que tendremos
+		   A[j]=pivote; // los menores a su izquierda y los mayores a su derecha
+		   if(izq<j-1){
+		      QuickSort(A,izq,j-1); // ordenamos subarray izquierdo
+		   }
+		   if(j+1 <der){
+		      QuickSort(A,j+1,der); // ordenamos subarray derecho
+		}
+	 }
 
-}
+	}
+
+
