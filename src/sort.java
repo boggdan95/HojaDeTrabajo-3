@@ -17,35 +17,14 @@ public class sort {
 	private BufferedWriter escritor;
 
 	public void generarArchivo(File archivo){
-		String numeros = "numeros.txt";
-		File fichero = new File (numeros);
-		
-		if (fichero.exists()){
-			try {
-				BufferedWriter escritor = new BufferedWriter(new FileWriter("numeros.Txt"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		for (int i = 0; i < 3000; i++){
-			int num = 0;
-			num = Math.subtractExact(0, 3000);
-			try {
-				escritor.write(" "+num+" ");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
 		try {
-			escritor.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		}
+		        BufferedWriter out = new BufferedWriter(new FileWriter("numeros.txt"));
+		            for (int i = 0; i < 3000; i++) {
+		            	String j = Integer.toString((int)(Math.random()*(3000-0+1)+0));
+		                out.write(j + " ");
+		            }
+		            out.close();
+		        } catch (IOException e) {}
 	}
 	
 	public void lectura(File archivo){
