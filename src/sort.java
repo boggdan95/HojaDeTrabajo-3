@@ -12,7 +12,7 @@ import java.io.IOException;
  *
  */
 public class sort {
-	private int [3000] vector;
+	private int [] vector = new int [3000];
 	
 	private BufferedWriter escritor;
 
