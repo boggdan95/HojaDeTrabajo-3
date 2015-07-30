@@ -12,6 +12,7 @@ import java.io.IOException;
  *
  */
 public class sort {
+	private int [3000] vector;
 	
 	private BufferedWriter escritor;
 
@@ -53,11 +54,11 @@ public class sort {
 	
 	public void QuickSort(int A[], int izq, int der){
 		  int pivote=A[izq]; // tomamos primer elemento como pivote
-		  int i=izq; // i realiza la búsqueda de izquierda a derecha
-		  int j=der; // j realiza la búsqueda de derecha a izquierda
+		  int i=izq; // i realiza la bÃºsqueda de izquierda a derecha
+		  int j=der; // j realiza la bÃºsqueda de derecha a izquierda
 		  int aux;
 		 
-		  while(i<j){            // mientras no se crucen las búsquedas
+		  while(i<j){            // mientras no se crucen las bÃºsquedas
 		     while(A[i]<=pivote && i<j) i++; // busca elemento mayor que pivote
 		     while(A[j]>pivote) j--;         // busca elemento menor que pivote
 		     if (i<j) {                      // si no se han cruzado                      
@@ -75,6 +76,20 @@ public class sort {
 		      QuickSort(A,j+1,der); // ordenamos subarray derecho
 		}
 	 }
+	 
+	 public void InsertionSort (){
+	    //CSE 373, S. Tanimoto, 2001
+	    for (int posicion=1; posicion< vector.length; posicion++){  
+	       
+	       int dato = vector[posicion];
+	       int j;
+	       for(j = posicion-1; j>=0 && dato< vector[j]; j--){
+	           vector[j + 1]= vector[j];
+	           vector[j + 1]= dato;
+	 }
+               
+    }
+   }
 
 	}
 
