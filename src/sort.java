@@ -2,6 +2,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -66,6 +70,51 @@ public class sort {
 	           vector[j + 1]= vector[j];
 	           vector[j + 1]= dato;
 	 }
+	 
+	 public static int[] mergeSort(int [] list) {
+        if (list.length <= 1) {
+            return list;
+        }
+        
+        // se divide el vector en 2 partes
+        int[] first = new int[list.length / 2];
+        int[] second = new int[list.length - first.length];
+        System.arraycopy(list, 0, first, 0, first.length);
+        System.arraycopy(list, first.length, second, 0, second.length);
+        
+        // utiliza recursion para volver a dividir las partes
+        mergeSort(first);
+        mergeSort(second);
+        
+        // envia las partes al metodo merge
+        merge(first, second, list);
+        return list;
+    }
+    
+    private static void merge(int[] first, int[] second, int [] result) {
+        // une las dos partes ingresadas
+        // utiliza 0 como el nuevo elemento de la primera parte
+        int iFirst = 0;
+        // utiliza 0 como el nuevo elemento de la segunda parte
+        int iSecond = 0;
+        
+        // j representa una posicion 
+        int j = 0;
+        // mientras que los dos nuevos elementos no esten al final del vector se realiza el proceso
+        while (iFirst < first.length && iSecond < second.length) {
+            if (first[iFirst] < second[iSecond]) {
+                result[j] = first[iFirst];
+                iFirst++;
+                } else {
+                result[j] = second[iSecond];
+                iSecond++;
+            }
+            j++;
+        }
+        // copia el resultado en un solo vector
+        System.arraycopy(first, iFirst, result, j, first.length - iFirst);
+        System.arraycopy(second, iSecond, result, j, second.length - iSecond);
+    }
                
     }
    }
