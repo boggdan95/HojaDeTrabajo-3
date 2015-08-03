@@ -2,6 +2,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * 
@@ -12,39 +16,19 @@ import java.io.IOException;
  *
  */
 public class sort {
+	private int [] vector = new int [3000];
 	
 	private BufferedWriter escritor;
 
 	public void generarArchivo(File archivo){
-		String numeros = "numeros.txt";
-		File fichero = new File (numeros);
-		
-		if (fichero.exists()){
-			try {
-				BufferedWriter escritor = new BufferedWriter(new FileWriter("numeros.Txt"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		for (int i = 0; i < 3000; i++){
-			int num = 0;
-			num = Math.subtractExact(0, 3000);
-			try {
-				escritor.write(" "+num+" ");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
 		try {
-			escritor.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		}
+		        BufferedWriter out = new BufferedWriter(new FileWriter("numeros.txt"));
+		            for (int i = 0; i < 3000; i++) {
+		            	String j = Integer.toString((int)(Math.random()*(3000-0+1)+0));
+		                out.write(j + " ");
+		            }
+		            out.close();
+		        } catch (IOException e) {}
 	}
 	
 	public void lectura(File archivo){
@@ -75,7 +59,64 @@ public class sort {
 		      QuickSort(A,j+1,der); // ordenamos subarray derecho
 		}
 	 }
+	 
+	 public void InsertionSort (){
+	    //CSE 373, S. Tanimoto, 2001
+	    for (int posicion=1; posicion< vector.length; posicion++){  
+	       
+	       int dato = vector[posicion];
+	       int j;
+	       for(j = posicion-1; j>=0 && dato< vector[j]; j--){
+	           vector[j + 1]= vector[j];
+	           vector[j + 1]= dato;
+	 }
+	 
+	 public static int[] mergeSort(int[] list) {
+        if (list.length <= 1) {
+            return list;
+        }
+        
+        // se divide el vector en 2 partes
+        int[] first = new int[list.length / 2];
+        int[] second = new int[list.length - first.length];
+        System.arraycopy(list, 0, first, 0, first.length);
+        System.arraycopy(list, first.length, second, 0, second.length);
+        
+        // utiliza recursion para volver a dividir las partes
+        mergeSort(first);
+        mergeSort(second);
+        
+        // envia las partes al metodo merge
+        merge(first, second, list);
+        return list;
+    }
+    
+    private static void merge(int[] first, int[] second, int [] result) {
+        // une las dos partes ingresadas
+        // utiliza 0 como el nuevo elemento de la primera parte
+        int iFirst = 0;
+        // utiliza 0 como el nuevo elemento de la segunda parte
+        int iSecond = 0;
+        
+        // j representa una posicion 
+        int h = 0;
+        // mientras que los dos nuevos elementos no esten al final del vector se realiza el proceso
+        while (iFirst < first.length && iSecond < second.length) {
+            if (first[iFirst] < second[iSecond]) {
+                result[h] = first[iFirst];
+                iFirst++;
+                } else {
+                result[j] = second[iSecond];
+                iSecond++;
+            }
+            h++;
+        }
+        // copia el resultado en un solo vector
+        System.arraycopy(first, iFirst, result, j, first.length - iFirst);
+        System.arraycopy(second, iSecond, result, j, second.length - iSecond);
+    }
+               
+    }
+   }
 
 	}
-
-
